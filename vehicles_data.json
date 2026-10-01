@@ -1,0 +1,144 @@
+[
+{
+  "model": "vehicles.vehicle",
+  "pk": 1,
+  "fields": {
+    "name": "Creta",
+    "brand": "Hyundai",
+    "color": "white",
+    "registration_number": "UP 14 XX XX98",
+    "kilometers": 14567,
+    "price": "800000.00",
+    "year": 2024,
+    "fuel_type": "Petrol",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-09-29_111301.png",
+    "seller_name": "Jatin Sharma",
+    "seller_phone": "7599056773"
+  }
+},
+{
+  "model": "vehicles.vehicle",
+  "pk": 2,
+  "fields": {
+    "name": "Fortuner",
+    "brand": "Toyota",
+    "color": "white",
+    "registration_number": "UP 14 XX XX01",
+    "kilometers": 9875,
+    "price": "4200000.00",
+    "year": 2025,
+    "fuel_type": "Petrol",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-09-29_111555.png",
+    "seller_name": "CarCraft Seller",
+    "seller_phone": "9999999999"
+  }
+},
+{
+  "model": "vehicles.vehicle",
+  "pk": 3,
+  "fields": {
+    "name": "Hyundai I20",
+    "brand": "Hyundai",
+    "color": "red",
+    "registration_number": "UP 13 XX XX50",
+    "kilometers": 26198,
+    "price": "350000.00",
+    "year": 2023,
+    "fuel_type": "Petrol",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-09-29_111726.png",
+    "seller_name": "Himanshu Yadav",
+    "seller_phone": "9839417211"
+  }
+},
+{
+  "model": "vehicles.vehicle",
+  "pk": 4,
+  "fields": {
+    "name": "Tiago EV",
+    "brand": "TATA",
+    "color": "yellow",
+    "registration_number": "UP 67 XX XX98",
+    "kilometers": 7525,
+    "price": "500000.00",
+    "year": 2025,
+    "fuel_type": "Electric",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-09-29_111906.png",
+    "seller_name": "CarCraft Seller",
+    "seller_phone": "9999999999"
+  }
+},
+{
+  "model": "vehicles.vehicle",
+  "pk": 5,
+  "fields": {
+    "name": "Swift Dzire",
+    "brand": "Maruti Suzuki",
+    "color": "white",
+    "registration_number": "UP 73 XX XX90",
+    "kilometers": 32655,
+    "price": "250000.00",
+    "year": 2022,
+    "fuel_type": "CNG",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-09-29_112029.png",
+    "seller_name": "CarCraft Seller",
+    "seller_phone": "9999999999"
+  }
+},
+{
+  "model": "vehicles.vehicle",
+  "pk": 6,
+  "fields": {
+    "name": "Defender",
+    "brand": "Land Rover",
+    "color": "Dark Green",
+    "registration_number": "UP 14 XX XX84",
+    "kilometers": 10250,
+    "price": "15000000.00",
+    "year": 2025,
+    "fuel_type": "Diesel",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-09-29_114638.png",
+    "seller_name": "CarCraft Seller",
+    "seller_phone": "9999999999"
+  }
+},
+{
+  "model": "vehicles.vehicle",
+  "pk": 7,
+  "fields": {
+    "name": "BMW M5",
+    "brand": "BMW",
+    "color": "white",
+    "registration_number": "UP 14 XX XX98",
+    "kilometers": 5026,
+    "price": "16500000.00",
+    "year": 2026,
+    "fuel_type": "Diesel",
+    "available": true,
+    "image": "vehicles/Screenshot_2026-10-01_092137.png",
+    "seller_name": "Krishna",
+    "seller_phone": "9634xxxxxx"
+  }
+},
+{
+  "model": "vehicles.servicebooking",
+  "pk": 1,
+  "fields": {
+    "customer_name": "xyz",
+    "phone": "6853213425",
+    "car_model": "brezza",
+    "registration_number": "UP 13 XX XX50",
+    "service_type": "oil",
+    "preferred_date": "2026-10-05",
+    "preferred_time": "10:00:00",
+    "notes": "",
+    "status": "pending",
+    "created_at": "2026-10-01T04:47:36.079Z"
+  }
+}
+]
