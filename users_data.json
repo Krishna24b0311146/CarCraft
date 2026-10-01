@@ -1,0 +1,56 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$ezXWY6PFXItsSiNVQ5hiUT$DgHPJX7vTEwBUuNOEE2QN9grzsOalcGCkvClVK5VnWI=",
+    "last_login": "2026-10-01T05:20:45.906Z",
+    "is_superuser": true,
+    "username": "krishna",
+    "first_name": "",
+    "last_name": "",
+    "email": "krishnagupta123456krish@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-09-29T04:07:03.240Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$diLtm7egF2salu7Bjjtmo6$RdxiKwzej7V3eSJF7qTE4Qi0j5dv7LPUSbbL6nH48UU=",
+    "last_login": "2026-09-30T10:33:57.380Z",
+    "is_superuser": false,
+    "username": "krishna_24b03111",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-30T07:50:58.875Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$XIckHiECUdy0yzpWZZN2Ul$G5p6DG0Bm7hf7tF76a6HXRoo40FyqgLA0pn8HSUDs+k=",
+    "last_login": "2026-10-01T05:44:42.661Z",
+    "is_superuser": false,
+    "username": "jatinsh@12",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-01T05:44:41.418Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
