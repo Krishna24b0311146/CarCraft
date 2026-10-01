@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CarCraft | Find Your Perfect Car</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(245, 158, 11, 0.06),
+                    transparent 30%
+                ),
+                #080b12;
+
+            font-family: Arial, sans-serif;
+            color: #f8fafc;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: rgba(8, 11, 18, 0.92);
+            padding: 14px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(15px);
+
+            position: relative;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            margin-left: 15px;
+            color: #cbd5e1 !important;
+            transition: 0.25s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #f59e0b !important;
+        }
+
+        .navbar .btn {
+            border-radius: 10px;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(245,158,11,0.13),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0b0f19,
+                    #111827 55%,
+                    #080b12
+                );
+
+            color: white;
+
+            padding: 100px 20px 80px;
+
+            border-radius: 0 0 45px 45px;
+
+            min-height: 560px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45);
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background: rgba(245,158,11,0.06);
+
+            filter: blur(80px);
+
+            top: -250px;
+            right: -150px;
+
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 62px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 15px;
+
+            text-shadow:
+                0 10px 30px rgba(0,0,0,0.45);
+        }
+
+        .hero .lead {
+            font-size: 19px;
+            color: #cbd5e1;
+        }
+
+
+        /* ================= SEARCH ================= */
+
+        .search-box {
+            max-width: 750px;
+
+            margin: 35px auto 0;
+
+            padding: 8px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 16px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.35);
+
+            transition: 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: rgba(245,158,11,0.6);
+
+            box-shadow:
+                0 20px 60px rgba(245,158,11,0.08);
+        }
+
+        .search-box .form-control {
+            border: none;
+
+            box-shadow: none;
+
+            border-radius: 11px;
+
+            background: transparent;
+
+            color: white;
+        }
+
+        .search-box .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        .search-box .btn {
+            border-radius: 11px;
+
+            font-weight: 700;
+
+            background: #f59e0b;
+
+            border: none;
+
+            color: #111827;
+
+            transition: 0.25s;
+        }
+
+        .search-box .btn:hover {
+            background: #fbbf24;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= FILTER BOX ================= */
+
+        .filter-box {
+            max-width: 1100px;
+
+            margin: 28px auto 0;
+
+            padding: 20px;
+
+            background: rgba(255,255,255,0.055);
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.25);
+        }
+
+        .filter-box .form-select,
+        .filter-box .form-control {
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            min-height: 48px;
+
+            border-radius: 11px;
+
+            background-color: #151b28;
+
+            color: #f8fafc;
+
+            box-shadow: none;
+        }
+
+        .filter-box .form-select:focus,
+        .filter-box .form-control:focus {
+
+            border-color: #f59e0b;
+
+            box-shadow:
+                0 0 0 3px rgba(245,158,11,0.12);
+        }
+
+        .filter-box .form-select option {
+            background: #151b28;
+            color: white;
+        }
+
+        .filter-box .btn-warning {
+            background: #f59e0b;
+
+            border: none;
+
+            color: #111827;
+
+            font-weight: 700;
+
+            border-radius: 11px;
+        }
+
+        .filter-box .btn-light {
+
+            background: #1f2937;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            color: white;
+
+            border-radius: 11px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main-content {
+            padding-top: 55px;
+            padding-bottom: 30px;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .feature-box {
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #151b28,
+                    #0f141f
+                );
+
+            padding: 30px 22px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            height: 100%;
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.3);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+
+            transform-style: preserve-3d;
+        }
+
+        .feature-box:hover {
+
+            transform:
+                translateY(-10px)
+                perspective(700px)
+                rotateX(2deg);
+
+            border-color:
+                rgba(245,158,11,0.35);
+
+            box-shadow:
+                0 25px 55px rgba(0,0,0,0.45),
+                0 0 30px rgba(245,158,11,0.04);
+        }
+
+        .feature-box h5 {
+            color: #f8fafc;
+        }
+
+        .feature-box p {
+            color: #94a3b8 !important;
+        }
+
+
+        /* ================= SECTION ================= */
+
+        .section-title {
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: #f8fafc;
+        }
+
+        .section-title + p {
+            font-size: 15px;
+
+            color: #94a3b8 !important;
+        }
+
+        .badge {
+            font-size: 13px;
+
+            font-weight: 600;
+
+            border-radius: 8px;
+        }
+
+
+        /* ================= CAR CARD ================= */
+
+        .car-card {
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #171d2a,
+                    #0f141e
+                );
+
+            color: #f8fafc;
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.3) !important;
+
+            transform-style: preserve-3d;
+        }
+
+        .car-card:hover {
+
+            transform:
+                translateY(-12px)
+                perspective(1000px)
+                rotateX(2deg);
+
+            border-color:
+                rgba(245,158,11,0.35);
+
+            box-shadow:
+                0 30px 65px rgba(0,0,0,0.5),
+                0 0 30px rgba(245,158,11,0.04) !important;
+        }
+
+
+        /* ================= CAR IMAGE ================= */
+
+        .car-image {
+
+            width: 100%;
+
+            height: 230px;
+
+            object-fit: contain;
+
+            padding: 12px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #18365a 0%,
+                    #0b1728 55%,
+                    #050b14 100%
+                );
+
+            transition:
+                transform 0.45s ease,
+                filter 0.4s ease;
+
+            filter: brightness(0.96) saturate(1.08);
+        }
+
+        .car-card:hover .car-image {
+
+            transform: scale(1.025);
+
+            filter: brightness(1) saturate(1.12);
+        }
+
+
+        /* ================= CARD BODY ================= */
+
+        .car-card .card-body {
+            padding: 22px;
+        }
+
+        .car-name {
+
+            font-weight: 700;
+
+            margin-bottom: 4px;
+
+            color: #f8fafc;
+        }
+
+        .car-card .text-muted {
+            color: #94a3b8 !important;
+        }
+
+        .spec-item {
+            padding: 8px 0;
+        }
+
+        .spec-item strong {
+            color: #e2e8f0;
+        }
+
+        /* ================= PRICE ================= */
+
+        .price {
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            color: #f59e0b;
+
+            text-shadow:
+                0 0 20px rgba(245,158,11,0.15);
+        }
+
+
+        /* ================= VIEW BUTTON ================= */
+
+        .view-btn {
+
+            border-radius: 11px;
+
+            padding: 9px 15px;
+
+            font-weight: 700;
+
+            background: #f59e0b;
+
+            border: none;
+
+            color: #111827;
+
+            transition: 0.25s;
+        }
+
+        .view-btn:hover {
+
+            background: #fbbf24;
+
+            color: #111827;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(245,158,11,0.18);
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .bg-success {
+            background: #16a34a !important;
+        }
+
+        .bg-danger {
+            background: #dc2626 !important;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b0f19,
+                    #111827
+                );
+
+            color: white;
+
+            padding: 50px 0;
+
+            margin-top: 70px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        footer h4 {
+            font-weight: 700;
+        }
+
+        footer p {
+            color: #94a3b8;
+        }
+
+
+        /* ================= VIDEO INTRO ================= */
+
+        .intro-screen {
+
+            position: relative;
+
+            width: 100%;
+
+            z-index: 9999;
+
+            background: #000;
+
+            overflow: hidden;
+        }
+
+        .intro-video {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .intro-message {
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: 150px;
+
+            transform: translateX(-50%);
+
+            text-align: center;
+
+            color: white;
+
+            width: 100%;
+
+            text-shadow:
+                0 3px 15px rgba(0,0,0,0.9);
+
+            opacity: 0;
+
+            transition:
+                opacity 1s ease;
+
+            pointer-events: none;
+        }
+
+        .intro-message.visible {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .intro-message h1 {
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .intro-message p {
+
+            font-size: 18px;
+
+            margin-bottom: 18px;
+        }
+
+        .scroll-link {
+            display: inline-block;
+            pointer-events: auto !important;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .scroll-link:hover {
+            transform: translateY(2px);
+        }
+
+        .scroll-text {
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            color: #f59e0b;
+
+            animation:
+                scrollBounce 1.5s infinite;
+        }
+
+        @keyframes scrollBounce {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+
+        /* ================= DESKTOP NAVBAR ================= */
+
+        @media (min-width: 992px) {
+
+            .navbar-collapse {
+
+                display: flex !important;
+
+                align-items: center;
+
+                width: 100%;
+            }
+
+            .navbar-collapse > .navbar-nav:first-child {
+
+                margin-left: 20px;
+            }
+
+            .navbar-collapse > .navbar-nav:last-child {
+
+                margin-left: auto !important;
+            }
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .hero {
+
+                padding: 60px 15px 50px;
+
+                border-radius: 0 0 30px 30px;
+            }
+
+            .hero h1 {
+
+                font-size: 36px;
+            }
+
+            .filter-box {
+
+                padding: 15px;
+            }
+
+            .car-image {
+
+                height: 220px;
+
+                padding: 10px;
+            }
+
+            .intro-message {
+
+                bottom: 60px;
+
+                padding: 0 15px;
+            }
+
+            .intro-message h1 {
+
+                font-size: 25px;
+
+                margin-bottom: 6px;
+            }
+
+            .intro-message p {
+
+                font-size: 14px;
+
+                margin-bottom: 12px;
+            }
+
+            .scroll-text {
+
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+{% load static %}
+
+
+<!-- ================= CARCRAFT VIDEO INTRO ================= -->
+
+<div class="intro-screen" id="introScreen">
+
+    <video class="intro-video" autoplay muted playsinline>
+
+        <source src="{% static 'videos/carcraft_intro.mp4' %}"
+                type="video/mp4">
+
+    </video>
+
+
+    <div class="intro-message" id="introMessage">
+
+        <h1>WELCOME TO CARCRAFT</h1>
+
+        <p>
+            Your journey to the perfect car starts here.
+        </p>
+
+        <a href="#vehicles" class="scroll-link">
+            <div class="scroll-text">
+                ⬇ Scroll to Explore ⬇
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand brand" href="/">
+            CarCraft
+        </a>
+
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse"
+             id="navbarMenu">
+
+
+            <!-- LEFT NAVIGATION -->
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+
+                    <a class="nav-link active"
+                       href="/">
+                        Buy Cars
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{% url 'sell_vehicle' %}">
+                        Sell Cars
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                              href="{% url 'service_booking' %}">
+                        Services
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- RIGHT NAVIGATION -->
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+
+                        <span class="nav-link">
+                            Welcome, {{ user.username }}
+                        </span>
+
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light px-3">
+                                Logout
+                            </button>
+                        </form>
+
+
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a class="btn btn-outline-light px-3"
+                           href="{% url 'login' %}">
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a class="btn btn-light px-3"
+                           href="{% url 'signup' %}">
+
+                            Sign Up
+
+                        </a>
+
+                    </li>
+
+                {% endif %}
+
+
+                <li class="nav-item ms-lg-2">
+
+                    <a class="btn btn-outline-light px-3"
+                       href="/admin/">
+
+                        Admin
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero text-center">
+
+    <div class="container">
+
+        <h1>
+            Find Your Perfect Car
+        </h1>
+
+        <p class="lead mt-3">
+            Quality cars. Transparent prices. Better choices.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <form method="GET"
+              class="search-box">
+
+            <div class="input-group input-group-lg">
+
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Search by car name or brand..."
+                    value="{{ search }}"
+                >
+
+                <button
+                    class="btn btn-warning px-4"
+                    type="submit">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- FILTERS -->
+
+        <div class="filter-box">
+
+            <form method="GET"
+                  class="row g-3">
+
+                <input type="hidden" name="search" value="{{ search }}">
+
+
+                <!-- BRAND -->
+
+                <div class="col-lg-2 col-md-4">
+
+                    <select name="brand"
+                            class="form-select">
+
+                        <option value="">
+                            All Brands
+                        </option>
+
+                        {% for b in brands %}
+
+                            <option value="{{ b }}"
+                                {% if selected_brand == b %}
+                                    selected
+                                {% endif %}>
+
+                                {{ b }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- FUEL -->
+
+                <div class="col-lg-2 col-md-4">
+
+                    <select name="fuel"
+                            class="form-select">
+
+                        <option value="">
+                            All Fuel Types
+                        </option>
+
+                        {% for f in fuels %}
+
+                            <option value="{{ f }}"
+                                {% if selected_fuel == f %}
+                                    selected
+                                {% endif %}>
+
+                                {{ f }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- YEAR -->
+
+                <div class="col-lg-2 col-md-4">
+
+                    <select name="year"
+                            class="form-select">
+
+                        <option value="">
+                            All Years
+                        </option>
+
+                        {% for y in years %}
+
+                            <option value="{{ y }}"
+                                {% if year == y|stringformat:"s" %}
+                                    selected
+                                {% endif %}>
+
+                                {{ y }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="col-lg-2 col-md-4">
+
+                    <input
+                        type="number"
+                        name="price"
+                        value="{{ price }}"
+                        class="form-control"
+                        placeholder="Max Price"
+                    >
+
+                </div>
+
+
+                <!-- SORT -->
+
+                <div class="col-lg-2 col-md-4">
+
+                    <select name="sort"
+                            class="form-select">
+
+                        <option value="">
+                            Sort By
+                        </option>
+
+                        <option value="low"
+                            {% if sort == "low" %}
+                                selected
+                            {% endif %}>
+
+                            Price: Low to High
+
+                        </option>
+
+                        <option value="high"
+                            {% if sort == "high" %}
+                                selected
+                            {% endif %}>
+
+                            Price: High to Low
+
+                        </option>
+
+                        <option value="newest"
+                            {% if sort == "newest" %}
+                                selected
+                            {% endif %}>
+
+                            Newest First
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="col-lg-2 col-md-4 d-flex align-items-center gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning w-100">
+
+                        Apply
+
+                    </button>
+
+                    <a
+                        href="/"
+                        class="btn btn-light w-100">
+
+                        Clear
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container main-content">
+
+
+    <!-- FEATURES -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+
+            <div class="feature-box">
+
+                <h5 class="fw-bold">
+                    Quality Cars
+                </h5>
+
+                <p class="mb-0">
+                    Carefully selected vehicles for you.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="feature-box">
+
+                <h5 class="fw-bold">
+                    Best Deals
+                </h5>
+
+                <p class="mb-0">
+                    Find cars at competitive prices.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="feature-box">
+
+                <h5 class="fw-bold">
+                    Service Support
+                </h5>
+
+                <p class="mb-0">
+                    Reliable service and customer support.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- VEHICLES HEADER -->
+
+    <div class="d-flex justify-content-between
+                align-items-center mb-4"
+         id="vehicles">
+
+        <div>
+
+            <h2 class="section-title mb-1">
+                Featured Cars
+            </h2>
+
+            <p class="mb-0">
+                Explore our latest vehicles
+            </p>
+
+        </div>
+
+
+        <span class="badge bg-dark px-3 py-2">
+
+            {{ vehicles|length }} Cars Available
+
+        </span>
+
+    </div>
+
+
+    <!-- VEHICLES -->
+
+    <div class="row g-4">
+
+        {% for vehicle in vehicles %}
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card car-card h-100">
+
+
+                <!-- IMAGE -->
+
+                {% if vehicle.image %}
+
+                    <img
+                        src="{{ vehicle.image.url }}"
+                        class="car-image"
+                        alt="{{ vehicle.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="car-image d-flex
+                                align-items-center
+                                justify-content-center"
+                         style="background:#1f2937;color:#94a3b8;">
+
+                        No Image Available
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- CARD BODY -->
+
+                <div class="card-body">
+
+
+                    <!-- NAME + STATUS -->
+
+                    <div class="d-flex justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <h4 class="car-name">
+                                {{ vehicle.name }}
+                            </h4>
+
+                            <p class="text-muted mb-0">
+                                {{ vehicle.brand }} • {{ vehicle.year }}
+                            </p>
+
+                        </div>
+
+
+                        {% if vehicle.available %}
+
+                            <span class="badge bg-success">
+                                Available
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                Sold
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- SPECS -->
+
+                    <div class="row mt-3 mb-3">
+
+                        <div class="col-6 spec-item">
+
+                            <small class="text-muted">
+                                Fuel
+                            </small>
+
+                            <br>
+
+                            <strong>
+                                {{ vehicle.fuel_type }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="col-6 spec-item">
+
+                            <small class="text-muted">
+                                Color
+                            </small>
+
+                            <br>
+
+                            <strong>
+                                {{ vehicle.color }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="col-6 spec-item">
+
+                            <small class="text-muted">
+                                Kilometers
+                            </small>
+
+                            <br>
+
+                            <strong>
+                                {{ vehicle.kilometers }} km
+                            </strong>
+
+                        </div>
+
+
+                        <div class="col-6 spec-item">
+
+                            <small class="text-muted">
+                                Registration
+                            </small>
+
+                            <br>
+
+                            <strong>
+                                {{ vehicle.registration_number }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRICE + BUTTON -->
+
+                    <div class="d-flex justify-content-between
+                                align-items-center pt-2">
+
+                        <span class="price">
+                            ₹{{ vehicle.price }}
+                        </span>
+
+
+                        <a
+                            href="{% url 'vehicle_detail' vehicle.id %}"
+                            class="btn view-btn">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="text-center py-5">
+
+            <h4>
+                No cars found
+            </h4>
+
+            <p class="text-muted">
+                Try changing your search or filters.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container text-center">
+
+        <h4>
+            CarCraft
+        </h4>
+
+        <p class="mb-1">
+            Your trusted automotive dealership platform.
+        </p>
+
+        <small class="text-secondary">
+            © 2026 CarCraft. All Rights Reserved.
+        </small>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= BOOTSTRAP JS ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- ================= VIDEO SCRIPT ================= -->
+
+<script>
+
+    const introVideo =
+        document.querySelector(".intro-video");
+
+    const introMessage =
+        document.getElementById("introMessage");
+
+
+    if (introVideo) {
+
+        introVideo.addEventListener("ended", function () {
+
+            introVideo.pause();
+
+            if (introMessage) {
+
+                introMessage.classList.add("visible");
+                introMessage.style.opacity = "1";
+
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

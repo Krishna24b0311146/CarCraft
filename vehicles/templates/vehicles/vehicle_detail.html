@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ vehicle.name }} | CarCraft</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+
+            background:
+                radial-gradient(circle at 10% 10%, #173b67 0%, transparent 30%),
+                radial-gradient(circle at 90% 20%, #102c52 0%, transparent 30%),
+                linear-gradient(135deg, #050b14, #0b1626 50%, #07101c);
+
+            min-height: 100vh;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: rgba(5, 11, 20, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 15px 0;
+        }
+
+        .brand {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .back-btn {
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+
+        /* ================= MAIN CARD ================= */
+
+        .detail-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.10),
+                    rgba(255,255,255,0.04)
+                );
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.45),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(15px);
+        }
+
+
+        /* ================= IMAGE AREA ================= */
+
+        .image-container {
+
+            height: 560px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #18365a 0%,
+                    #0b1728 55%,
+                    #050b14 100%
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        .image-container::after {
+
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.08),
+                    transparent 35%,
+                    rgba(0,0,0,0.20)
+                );
+
+            pointer-events: none;
+        }
+
+
+        .car-image {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 15px;
+
+            display: block;
+
+            filter:
+                drop-shadow(0 25px 30px rgba(0,0,0,0.55));
+
+            transition: transform 0.5s ease;
+        }
+
+
+        .image-container:hover .car-image {
+
+            transform: scale(1.025);
+        }
+
+
+        /* ================= DETAILS ================= */
+
+        .details-area {
+
+            padding: 45px;
+        }
+
+
+        .available-badge {
+
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+
+            background: rgba(34,197,94,0.14);
+
+            color: #4ade80;
+
+            border: 1px solid rgba(74,222,128,0.25);
+
+            margin-bottom: 18px;
+        }
+
+
+        .sold-badge {
+
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            background: rgba(239,68,68,0.14);
+
+            color: #f87171;
+
+            border: 1px solid rgba(248,113,113,0.25);
+
+            margin-bottom: 18px;
+        }
+
+
+        .car-title {
+
+            font-size: clamp(38px, 5vw, 58px);
+
+            font-weight: 800;
+
+            margin: 0;
+
+            letter-spacing: -1px;
+        }
+
+
+        .car-subtitle {
+
+            color: #9fb1c8;
+
+            font-size: 18px;
+
+            margin-top: 8px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .price {
+
+            color: #facc15;
+
+            font-size: 34px;
+
+            font-weight: 800;
+
+            margin-bottom: 30px;
+
+            text-shadow:
+                0 0 25px rgba(250,204,21,0.18);
+        }
+
+
+        /* ================= SPECIFICATIONS ================= */
+
+        .spec-box {
+
+            height: 100%;
+
+            padding: 20px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.10),
+                    rgba(255,255,255,0.035)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            box-shadow:
+                8px 8px 20px rgba(0,0,0,0.20),
+                inset 1px 1px 0 rgba(255,255,255,0.05);
+
+            transition: 0.3s;
+        }
+
+
+        .spec-box:hover {
+
+            transform: translateY(-4px);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(37,99,235,0.22),
+                    rgba(255,255,255,0.04)
+                );
+        }
+
+
+        .spec-label {
+
+            color: #91a4bc;
+
+            font-size: 13px;
+
+            display: block;
+
+            margin-bottom: 6px;
+        }
+
+
+        .spec-value {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            color: #ffffff;
+        }
+
+
+        /* ================= SELLER ================= */
+
+        .seller-box {
+
+            margin-top: 28px;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(30,64,175,0.25),
+                    rgba(15,23,42,0.65)
+                );
+
+            border: 1px solid rgba(96,165,250,0.18);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.25);
+        }
+
+
+        .seller-title {
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+        }
+
+
+        .seller-info {
+
+            color: #cbd5e1;
+
+            margin-bottom: 7px;
+        }
+
+
+        .seller-info strong {
+
+            color: #ffffff;
+        }
+
+
+        /* ================= CONTACT BUTTON ================= */
+
+        .contact-btn {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            margin-top: 12px;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            color: #111827;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #facc15,
+                    #f59e0b
+                );
+
+            box-shadow:
+                0 8px 25px rgba(250,204,21,0.20);
+
+            transition: 0.3s;
+        }
+
+
+        .contact-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 14px 30px rgba(250,204,21,0.30);
+        }
+
+
+        /* ================= REGISTRATION ================= */
+
+        .registration-box {
+
+            margin-top: 22px;
+
+            padding: 18px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.045);
+
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+
+        .registration-label {
+
+            color: #8fa2b8;
+
+            font-size: 13px;
+        }
+
+
+        .registration-number {
+
+            margin-top: 5px;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            color: #ffffff;
+        }
+
+
+        /* ================= BOTTOM FEATURES ================= */
+
+        .feature-card {
+
+            height: 100%;
+
+            padding: 28px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.035)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.25);
+
+            transition: 0.3s;
+        }
+
+
+        .feature-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.35);
+        }
+
+
+        .feature-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .feature-card h5 {
+
+            font-weight: 700;
+        }
+
+
+        .feature-card p {
+
+            color: #94a3b8;
+
+            margin-bottom: 0;
+        }
+
+
+        /* ================= MODAL ================= */
+
+        .modal-content {
+
+            background: #0d1726;
+
+            color: white;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            border-radius: 18px;
+        }
+
+
+        .modal-header,
+        .modal-footer {
+
+            border-color: rgba(255,255,255,0.08);
+        }
+
+
+        .modal-body {
+
+            color: #cbd5e1;
+        }
+
+
+        .btn-close {
+
+            filter: invert(1);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            margin-top: 70px;
+
+            padding: 45px 0;
+
+            background: #030811;
+
+            border-top: 1px solid rgba(255,255,255,0.07);
+
+            color: white;
+        }
+
+
+        footer p {
+
+            color: #64748b;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 991px) {
+
+            .image-container {
+
+                height: 400px;
+            }
+
+            .details-area {
+
+                padding: 30px;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            .image-container {
+
+                height: 300px;
+            }
+
+            .car-image {
+
+                padding: 8px;
+            }
+
+            .details-area {
+
+                padding: 24px;
+            }
+
+            .car-title {
+
+                font-size: 36px;
+            }
+
+            .price {
+
+                font-size: 28px;
+            }
+
+            .spec-box {
+
+                padding: 15px;
+            }
+
+            .feature-card {
+
+                padding: 22px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand brand" href="/">
+            CarCraft
+        </a>
+
+        <a href="/" class="btn btn-light back-btn">
+            ← All Cars
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container py-5">
+
+
+    <!-- CAR DETAIL -->
+
+    <div class="detail-card">
+
+        <div class="row g-0">
+
+
+            <!-- ================= IMAGE ================= -->
+
+            <div class="col-lg-6">
+
+                <div class="image-container">
+
+                    {% if vehicle.image %}
+
+                        <img
+                            src="{{ vehicle.image.url }}"
+                            class="car-image"
+                            alt="{{ vehicle.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="text-white fs-5">
+                            No Image Available
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= DETAILS ================= -->
+
+            <div class="col-lg-6">
+
+                <div class="details-area">
+
+
+                    <!-- STATUS -->
+
+                    {% if vehicle.available %}
+
+                        <span class="available-badge">
+                            ● AVAILABLE
+                        </span>
+
+                    {% else %}
+
+                        <span class="sold-badge">
+                            ● SOLD
+                        </span>
+
+                    {% endif %}
+
+
+
+                    <!-- NAME -->
+
+                    <h1 class="car-title">
+                        {{ vehicle.name }}
+                    </h1>
+
+
+                    <p class="car-subtitle">
+                        {{ vehicle.brand }} • {{ vehicle.year }}
+                    </p>
+
+
+                    <!-- PRICE -->
+
+                    <div class="price">
+                        ₹{{ vehicle.price }}
+                    </div>
+
+
+
+                    <!-- ================= SPECS ================= -->
+
+                    <div class="row g-3">
+
+
+                        <div class="col-6">
+
+                            <div class="spec-box">
+
+                                <span class="spec-label">
+                                    Fuel Type
+                                </span>
+
+                                <div class="spec-value">
+                                    {{ vehicle.fuel_type }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6">
+
+                            <div class="spec-box">
+
+                                <span class="spec-label">
+                                    Color
+                                </span>
+
+                                <div class="spec-value">
+                                    {{ vehicle.color }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6">
+
+                            <div class="spec-box">
+
+                                <span class="spec-label">
+                                    Kilometers
+                                </span>
+
+                                <div class="spec-value">
+                                    {{ vehicle.kilometers }} km
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6">
+
+                            <div class="spec-box">
+
+                                <span class="spec-label">
+                                    Model Year
+                                </span>
+
+                                <div class="spec-value">
+                                    {{ vehicle.year }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ================= SELLER ================= -->
+
+                    <div class="seller-box">
+
+                    
+                        <!-- CONTACT BUTTON -->
+
+                        <button
+                            type="button"
+                            class="contact-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#sellerModal">
+
+                            Contact Seller
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= REGISTRATION ================= -->
+
+                    <div class="registration-box">
+
+                        <div class="registration-label">
+                            Registration Number
+                        </div>
+
+                        <div class="registration-number">
+                            {{ vehicle.registration_number }}
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <div class="row g-4 mt-5">
+
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                <h5>
+                    Verified Cars
+                </h5>
+
+                <p>
+                    Browse quality vehicles listed on CarCraft.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ₹
+                </div>
+
+                <h5>
+                    Transparent Pricing
+                </h5>
+
+                <p>
+                    Clear pricing helps you make better decisions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ☎
+                </div>
+
+                <h5>
+                    Easy Enquiry
+                </h5>
+
+                <p>
+                    Contact the seller for more information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= SELLER MODAL ================= -->
+
+<div
+    class="modal fade"
+    id="sellerModal"
+    tabindex="-1"
+    aria-labelledby="sellerModalLabel"
+    aria-hidden="true"
+>
+
+
+    <div class="modal-dialog modal-dialog-centered">
+
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h5
+                    class="modal-title"
+                    id="sellerModalLabel">
+
+                    Seller Information
+
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                </button>
+
+            </div>
+
+
+
+            <div class="modal-body">
+
+                <p>
+
+                    <strong>Seller Name:</strong><br>
+
+                    {{ vehicle.seller_name }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>Phone Number:</strong><br>
+
+                    {{ vehicle.seller_phone }}
+
+                </p>
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Close
+
+                </button>
+
+
+                <a
+                    href="tel:{{ vehicle.seller_phone }}"
+                    class="btn btn-warning">
+
+                    Call Seller
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container text-center">
+
+        <h4>
+            CarCraft
+        </h4>
+
+        <p class="mb-1">
+            Your trusted automotive marketplace.
+        </p>
+
+        <small class="text-secondary">
+            © 2026 CarCraft. All Rights Reserved.
+        </small>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ================= BOOTSTRAP JS ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+</html>

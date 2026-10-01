@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: carcraft
+    runtime: python
+    plan: free
+    buildCommand: bash build.sh
+    startCommand: gunicorn carcraft.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://*.onrender.com
+      - key: SECRET_KEY
+        generateValue: true

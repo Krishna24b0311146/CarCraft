@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Car | CarCraft</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle at 15% 10%, rgba(245, 158, 11, 0.08), transparent 28%), #080b12;
+            color: #f8fafc;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background: rgba(8, 11, 18, 0.92);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .brand {
+            color: #f8fafc;
+            font-size: 25px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .listing-wrap {
+            max-width: 900px;
+            padding-top: 56px;
+            padding-bottom: 64px;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+        }
+        .intro, .form-text {
+            color: #a8b2c2;
+        }
+        .listing-form {
+            margin-top: 28px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            background: #111722;
+        }
+        .form-label {
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+        .form-control {
+            min-height: 46px;
+            border-color: #303a49;
+            background: #0b1019;
+            color: #f8fafc;
+        }
+        .form-control:focus {
+            border-color: #f59e0b;
+            background: #0b1019;
+            color: #f8fafc;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+        }
+        input[type="file"].form-control {
+            padding: 9px 12px;
+        }
+        .submit-btn {
+            min-height: 46px;
+            background: #f59e0b;
+            border: 0;
+            color: #111827;
+            font-weight: 700;
+        }
+        .submit-btn:hover {
+            background: #fbbf24;
+            color: #111827;
+        }
+        .field-errors {
+            color: #fca5a5;
+            font-size: 14px;
+        }
+        @media (max-width: 576px) {
+            .listing-wrap {
+                padding-top: 36px;
+            }
+            .listing-form {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <a class="brand" href="{% url 'vehicle_list' %}">CarCraft</a>
+            <div class="d-flex align-items-center gap-2">
+                <a class="btn btn-outline-light btn-sm px-3" href="{% url 'vehicle_list' %}">Buy Cars</a>
+                <a class="btn btn-outline-light btn-sm px-3" href="{% url 'service_booking' %}">Services</a>
+                {% if user.is_authenticated %}
+                    <span class="text-secondary small d-none d-sm-inline ms-2">Welcome, {{ user.username }}</span>
+                    <form method="POST" action="{% url 'logout' %}" class="d-inline ms-1">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-warning btn-sm px-3">Logout</button>
+                    </form>
+                {% else %}
+                    <a class="btn btn-outline-warning btn-sm px-3" href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container listing-wrap">
+        <h1>Sell Your Car</h1>
+        <p class="intro">Add your car details and contact information to list it on CarCraft.</p>
+
+        {% for message in messages %}
+            <div class="alert alert-success" role="status">{{ message }}</div>
+        {% endfor %}
+
+        <form method="post" enctype="multipart/form-data" class="listing-form">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+            {% endif %}
+            <div class="row g-3">
+                {% for field in form %}
+                    <div class="col-12 {% if field.name != 'image' %}col-md-6{% endif %}">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+                        {% for error in field.errors %}<div class="field-errors">{{ error }}</div>{% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="col-12 pt-2">
+                    <button class="btn submit-btn w-100" type="submit">List My Car</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
