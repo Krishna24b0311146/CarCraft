@@ -7,4 +7,3 @@ python manage.py collectstatic --noinput
 python manage.py migrate
 python manage.py loaddata vehicles_data.json
 python manage.py loaddata users_data.json
-python manage.py reset_admin
